@@ -1,4 +1,4 @@
-@use 'variables' as v;
+@use "variables" as v;
 
 *,
 *:after,
@@ -18,7 +18,7 @@ body {
 
 .container {
   width: 100%;
-  max-width: calc(800px + v.$mobile-container-padding-x);
+  max-width: calc(1366px + v.$mobile-container-padding-x);
   padding: {
     left: v.$mobile-container-padding-x;
     right: v.$mobile-container-padding-x;
