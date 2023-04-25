@@ -9,16 +9,17 @@
 
 html {
   font-size: v.$base-font-size;
-  background-color: v.$color-bg;
 }
 
 body {
   font-family: v.$primary-font;
+  background-color: v.$color-primary;
+  color: v.$color-Y2;
 }
 
 .container {
   width: 100%;
-  max-width: calc(1366px + v.$mobile-container-padding-x);
+  max-width: calc(1100px + v.$mobile-container-padding-x);
   padding: {
     left: v.$mobile-container-padding-x;
     right: v.$mobile-container-padding-x;

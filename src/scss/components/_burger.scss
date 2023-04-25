@@ -1,0 +1,42 @@
+@use "utils" as u;
+
+.burger {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 0;
+  @include u.media("tablet-medium") {
+    display: none;
+  }
+  &-wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+  &-line {
+    width: 24px;
+    height: 1px;
+    background-color: u.$color-Y2;
+    position: relative;
+    &::before {
+      position: absolute;
+      content: "";
+      width: 100%;
+      height: 100%;
+      top: 8px;
+      background: u.$color-Y2;
+    }
+    &::after {
+      position: absolute;
+      content: "";
+      width: 100%;
+      height: 100%;
+      top: -8px;
+      background: u.$color-Y2;
+    }
+  }
+}

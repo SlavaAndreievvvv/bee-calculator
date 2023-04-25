@@ -1,0 +1,29 @@
+@use "utils" as u;
+
+.header {
+  display: flex;
+  align-items: center;
+  height: 60px;
+  width: 100%;
+  background-color: u.$color-Y3;
+  &-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    @include u.media("tablet-medium") {
+      justify-content: space-between;
+      height: 80px;
+    }
+  }
+  &-button {
+    border: none;
+    outline: none;
+    background-color: transparent;
+    color: u.$color-Y2;
+    font-size: 14px;
+    display: none;
+    @include u.media("tablet-medium") {
+      display: block;
+    }
+  }
+}
