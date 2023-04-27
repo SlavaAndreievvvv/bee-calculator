@@ -10,7 +10,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    @include u.media("tablet-medium") {
+    @include u.media("tablet-wide") {
       justify-content: space-between;
       height: 80px;
     }
@@ -22,7 +22,7 @@
     color: u.$color-Y2;
     font-size: 14px;
     display: none;
-    @include u.media("tablet-medium") {
+    @include u.media("tablet-wide") {
       display: block;
     }
   }

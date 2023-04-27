@@ -1,0 +1,73 @@
+@use "utils" as u;
+
+.checkbox {
+  cursor: pointer;
+  display: inline-flex;
+
+  align-items: center;
+  position: relative;
+
+  &-input {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+  }
+  &-text {
+    font-size: 14px;
+    color: u.$color-Y3;
+  }
+
+  &-button {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20px;
+    height: 20px;
+    border: 2px solid u.$color-Y3;
+    border-radius: 2px;
+    background-color: transparent;
+    transition-property: border-color background-color;
+    transition-duration: 0.2s;
+    transition-timing-function: ease;
+    margin-right: 12px;
+  }
+
+  &-icon {
+    width: 24px;
+    height: 24px;
+    opacity: 0;
+    fill: u.$color-black;
+    transition: opacity 0.2s ease;
+    position: absolute;
+    top: -4px;
+    left: 1px;
+  }
+
+  &-input:checked + .checkbox-button {
+    background-color: u.$color-white;
+    border-color: transparent;
+  }
+
+  &-input:checked + .checkbox-button .checkbox-icon {
+    opacity: 1;
+  }
+  &-input:checked + .checkbox-button + .checkbox-text {
+    color: u.$color-Y2;
+  }
+}
+
+.checkbox-round {
+  &-button {
+    border-radius: 50%;
+  }
+  &-text {
+    width: 96px;
+    height: 50px;
+    fill: u.$color-Y3;
+    transition: all 0.2s ease;
+  }
+  &-input:checked + .checkbox-round-button + .checkbox-round-text {
+    fill: u.$color-Y2;
+  }
+}

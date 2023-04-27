@@ -10,7 +10,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  @include u.media("tablet-medium") {
+  @include u.media("tablet-wide") {
     display: none;
   }
   &-wrapper {

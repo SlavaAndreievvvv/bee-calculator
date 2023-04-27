@@ -1,0 +1,18 @@
+@use "utils" as u;
+
+.main {
+  display: flex;
+  flex-direction: column;
+  padding-top: 80px;
+  padding-bottom: 110px;
+
+  &-title {
+    margin-bottom: 40px;
+  }
+
+  &-content {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}

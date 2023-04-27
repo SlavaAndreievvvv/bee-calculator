@@ -1,0 +1,54 @@
+@use "utils" as u;
+
+.button-row {
+  width: 100%;
+  padding-top: 60px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  @include u.media("tablet-wide") {
+    justify-content: start;
+  }
+  &-button {
+    height: 60px;
+    padding-left: 32px;
+    padding-right: 32px;
+    border: 1px solid u.$color-Y2;
+    color: u.$color-Y2;
+    background-color: transparent;
+    font-size: 20px;
+    position: relative;
+    &:before {
+      position: absolute;
+      content: "";
+      top: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+      background-color: u.$color-Y2;
+      z-index: -1;
+      transition: transform 0.5s ease;
+      transform-origin: 0 0;
+      transform: scaleX(0);
+    }
+    &:hover {
+      color: u.$color-Y4;
+    }
+    &:hover::before {
+      transform: scaleX(1);
+    }
+    &:disabled {
+      color: u.$color-Y3;
+      border-color: u.$color-Y3;
+    }
+    &:disabled::before {
+      transform: scaleX(0);
+    }
+  }
+
+  &-button:first-child {
+    @include u.media("tablet-wide") {
+      margin-right: 60px;
+    }
+  }
+}

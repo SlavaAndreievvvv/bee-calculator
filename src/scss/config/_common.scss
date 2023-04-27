@@ -1,4 +1,5 @@
 @use "variables" as v;
+@use "mixins" as m;
 
 *,
 *:after,
@@ -15,11 +16,20 @@ body {
   font-family: v.$primary-font;
   background-color: v.$color-primary;
   color: v.$color-Y2;
+  min-height: 100vh;
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 .container {
   width: 100%;
-  max-width: calc(1100px + v.$mobile-container-padding-x);
+  max-width: calc(520px + v.$mobile-container-padding-x);
   padding: {
     left: v.$mobile-container-padding-x;
     right: v.$mobile-container-padding-x;
@@ -27,5 +37,20 @@ body {
   margin: {
     left: auto;
     right: auto;
+  }
+  @include m.media("tablet-wide") {
+    max-width: calc(1100px + v.$mobile-container-padding-x);
+  }
+}
+.row {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  border-top: 1px solid v.$color-Y3;
+  border-bottom: 1px solid v.$color-Y3;
+  @include m.media("tablet-wide") {
+    flex-direction: row;
   }
 }

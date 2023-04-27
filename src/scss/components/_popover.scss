@@ -12,7 +12,24 @@
   top: 52px;
   left: -36px;
   border-radius: 2px;
-  &-inner:not(:last-child) {
+  z-index: 200;
+  &-mobile {
+    position: relative;
+    display: flex;
+    opacity: 1;
+    top: 0;
+    left: 0;
+    flex-direction: column;
+    align-items: center;
+    background-color: transparent;
+    flex-wrap: nowrap;
+  }
+  &-inner-mobile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  &-inner-mr {
     margin-right: 40px;
   }
   &-title {
