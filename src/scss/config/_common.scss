@@ -8,6 +8,16 @@
   scroll-behavior: smooth;
 }
 
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
+
+html {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 html {
   font-size: v.$base-font-size;
 }
@@ -28,8 +38,9 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 .container {
+  min-width: 375px;
   width: 100%;
-  max-width: calc(520px + v.$mobile-container-padding-x);
+  max-width: calc(600px + v.$mobile-container-padding-x);
   padding: {
     left: v.$mobile-container-padding-x;
     right: v.$mobile-container-padding-x;
@@ -39,7 +50,7 @@ input[type="number"]::-webkit-outer-spin-button {
     right: auto;
   }
   @include m.media("tablet-wide") {
-    max-width: calc(1100px + v.$mobile-container-padding-x);
+    max-width: calc(1190px + v.$mobile-container-padding-x);
   }
 }
 .row {

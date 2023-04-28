@@ -7,6 +7,9 @@
   &-field {
     display: flex;
     align-items: center;
+    @include u.media("tablet") {
+      width: 100%;
+    }
   }
   &-label {
     font-size: 12px;
@@ -22,6 +25,8 @@
     margin-right: 10px;
     @include u.media("tablet") {
       margin-right: 30px;
+      max-width: 100%;
+      width: 100%;
     }
   }
   &-input {

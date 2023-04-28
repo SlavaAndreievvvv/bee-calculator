@@ -20,6 +20,9 @@
   &-head {
     background-color: u.$color-Y2;
     color: u.$color-white;
+    padding-left: 16px;
+    padding-right: 16px;
+    overflow: hidden;
   }
   &-head-2 {
     display: flex;
@@ -38,10 +41,30 @@
     background-color: u.$color-white;
     color: u.$color-Y2;
     overflow: hidden;
+    position: relative;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding-left: 16px;
+    padding-right: 16px;
   }
   &-body-img {
     width: 30px;
     height: 30px;
     fill: u.$color-Y2;
+    margin: 0 auto;
   }
+  &-body-icon {
+    position: absolute;
+    top: 50%;
+    right: 8px;
+    transform: translate(-50%, -50%);
+    fill: u.$color-Y2;
+    width: 18px;
+    height: 18px;
+  }
+}
+
+.info-data.active {
+  display: grid;
 }

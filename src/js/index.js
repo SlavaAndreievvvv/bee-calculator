@@ -1,11 +1,12 @@
-import { togglePopover } from "./togglePopover";
-import { toggleRegistration } from "./toggleRegistration";
-import { checkForm } from "./form";
-import { showBurgerMenu } from "./showBurgerMenu";
-import { changeInputRange } from "./inputRange";
-import { choseRatingStar } from "./choseRatingStar";
-import { showData } from "./showData";
-import { showDataInfo } from "./showDataInfo";
+import { togglePopover } from "./functions/togglePopover";
+import { toggleRegistration } from "./functions/toggleRegistration";
+import { checkForm } from "./functions/form";
+import { showBurgerMenu } from "./functions/showBurgerMenu";
+import { changeInputRange } from "./functions/inputRange";
+import { choseRatingStar } from "./functions/choseRatingStar";
+import { showData } from "./functions/showData";
+import { showDataInfo } from "./functions/showDataInfo";
+import { togglePopoverOnMobile } from "./functions/togglePopoverOnMobile";
 
 togglePopover();
 toggleRegistration();
@@ -15,3 +16,4 @@ changeInputRange();
 choseRatingStar();
 showData();
 showDataInfo();
+togglePopoverOnMobile();
