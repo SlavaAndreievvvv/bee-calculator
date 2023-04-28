@@ -1,0 +1,20 @@
+@use "utils" as u;
+
+.star {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  &-icon {
+    width: 24px;
+    height: 24px;
+    fill: u.$color-Y3;
+    cursor: pointer;
+  }
+  &-icon:not(:last-child) {
+    margin-right: 6px;
+  }
+}
+.star-icon.active {
+  fill: u.$color-Y2;
+}

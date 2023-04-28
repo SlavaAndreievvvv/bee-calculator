@@ -1,0 +1,70 @@
+@use "utils" as u;
+
+.info-data {
+  padding: 10px;
+  background-color: u.$color-Y4;
+  display: grid;
+  grid-template-columns: 300px 425px 100px 150px;
+  grid-gap: 10px;
+  justify-content: space-between;
+  gap: 12px;
+  overflow-x: scroll;
+  &-box {
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    max-width: 100%;
+  }
+  &-head {
+    background-color: u.$color-Y2;
+    color: u.$color-white;
+    padding-left: 16px;
+    padding-right: 16px;
+    overflow: hidden;
+  }
+  &-head-2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    &::before {
+      position: absolute;
+      content: "Волосатость";
+      @include u.media("tablet-wide") {
+        content: "Волосатость брюшка пчелы";
+      }
+    }
+  }
+  &-body {
+    background-color: u.$color-white;
+    color: u.$color-Y2;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  &-body-img {
+    width: 30px;
+    height: 30px;
+    fill: u.$color-Y2;
+    margin: 0 auto;
+  }
+  &-body-icon {
+    position: absolute;
+    top: 50%;
+    right: 8px;
+    transform: translate(-50%, -50%);
+    fill: u.$color-Y2;
+    width: 18px;
+    height: 18px;
+  }
+}
+
+.info-data.active {
+  display: grid;
+}

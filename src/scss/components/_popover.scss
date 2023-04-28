@@ -1,0 +1,56 @@
+@use "utils" as u;
+
+.popover {
+  display: none;
+  opacity: 0;
+  flex-wrap: wrap;
+  padding: 20px;
+  background-color: u.$color-white;
+  max-width: 600px;
+  width: 100%;
+  position: absolute;
+  top: 52px;
+  left: -36px;
+  border-radius: 2px;
+  z-index: 200;
+  &-mobile {
+    position: relative;
+    display: flex;
+    opacity: 1;
+    top: 0;
+    left: 0;
+    flex-direction: column;
+    align-items: center;
+    background-color: transparent;
+    flex-wrap: nowrap;
+  }
+  &-inner-mobile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  &-inner-mr {
+    margin-right: 40px;
+  }
+  &-title {
+    font-size: 14px;
+    color: u.$color-Y2;
+    margin-bottom: 26px;
+  }
+  &-item {
+    margin-bottom: 16px;
+  }
+  &-link {
+    text-decoration: none;
+    font-size: 12px;
+    color: u.$color-Y2;
+    transition: all 0.3s ease;
+    &:hover {
+      color: u.$color-Y3;
+    }
+  }
+}
+.popover.active {
+  display: flex;
+  opacity: 1;
+}

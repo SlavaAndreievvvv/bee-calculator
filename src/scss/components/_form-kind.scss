@@ -1,0 +1,10 @@
+@use "utils" as u;
+
+.form-kind {
+  display: flex;
+  flex-direction: column;
+
+  &-checkbox:not(:last-child) {
+    margin-bottom: 10px;
+  }
+}

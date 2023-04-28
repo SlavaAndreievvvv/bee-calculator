@@ -1,0 +1,9 @@
+@use "utils" as u;
+
+.kind {
+  margin-right: 20px;
+  width: 50%;
+  &-caption {
+    margin-bottom: 20px;
+  }
+}

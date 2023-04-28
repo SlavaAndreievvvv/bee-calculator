@@ -1,0 +1,13 @@
+@use "utils" as u;
+
+.price {
+  margin-bottom: 40px;
+  width: 100%;
+  @include u.media("tablet-wide") {
+    margin-right: 20px;
+    width: 50%;
+  }
+  &-caption {
+    margin-bottom: 30px;
+  }
+}

@@ -2,17 +2,798 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./scss/style.scss" />
-    <title>Parcel by Merge</title>
+    <title>bee-calculator</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag/dist/css/multi-select-tag.css"
+    />
   </head>
+  <style>
+    .mult-select-tag {
+      font-family: inherit;
+      font-size: 12px;
+    }
+    .mult-select-tag .btn-container {
+      border-left: transparent;
+    }
+    .mult-select-tag {
+      align-items: start;
+    }
+    .mult-select-tag .drawer {
+      top: 120%;
+      max-width: 430px;
+    }
+    .mult-select-tag .item-container {
+      flex-direction: row-reverse;
+      color: black;
+      border: none;
+      background: transparent;
+      border-radius: 0px;
+    }
+    .mult-select-tag .item-label {
+      font-size: 12px;
+      flex: 0 1 auto;
+      color: black;
+    }
+    .mult-select-tag .item-close-svg {
+      width: 14px;
+      margin-right: 0.5rem;
+      height: 14px;
+    }
+    .mult-select-tag .wrapper {
+      max-width: 100%;
+      height: 40px;
+    }
+    @media (min-width: 1024px) {
+      .mult-select-tag .wrapper {
+        max-width: 430px;
+      }
+    }
+    .mult-select-tag .body {
+      height: 40px;
+    }
+    .mult-select-tag button:first-child {
+      width: 16px;
+      height: 90%;
+    }
+    .mult-select-tag .input-body {
+      display: none;
+    }
+  </style>
   <body>
-    <div class="container index-page">
-      <h1 class="title index-page__title">Parcel by Merge</h1>
-      <a href="https://merge.rocks" target="_blank" class="cover">
-        <img src="./assets/images/cover.png" alt="merge" />
-      </a>
+    <header class="header">
+      <div class="header-wrapper container">
+        <div class="burger" id="burgerButton">
+          <div class="burger-wrapper">
+            <div class="burger-line"></div>
+          </div>
+        </div>
+        <a href="#">
+          <svg class="logo header-logo"><use xlink:href="#logo" /></svg>
+        </a>
+        <nav class="header-nav nav">
+          <ul class="list nav-list">
+            <li class="item nav-item" id="activePopover">
+              <a href="#" class="link nav-link">Пчелы</a>
+            </li>
+            <li class="item nav-item">
+              <a href="#" class="link nav-link">Дом пчелы</a>
+            </li>
+            <li class="item nav-item">
+              <a href="#" class="link nav-link">Соты</a>
+            </li>
+            <li class="item nav-item">
+              <a href="#" class="link nav-link">Дом пчелы</a>
+            </li>
+            <li class="item nav-item">
+              <a href="#" class="link nav-link" id="viewData">Таблица данных</a>
+            </li>
+          </ul>
+          <div class="popover" id="popover">
+            <div class="popover-inner popover-inner-mr">
+              <p class="popover-title">Индийская пчела</p>
+              <ul class="popover-list">
+                <li class="popover-item">
+                  <a href="#" class="popover-link">красная</a>
+                </li>
+                <li class="popover-item">
+                  <a href="#" class="popover-link">розовая</a>
+                </li>
+                <li class="popover-item">
+                  <a href="#" class="popover-link">черная</a>
+                </li>
+              </ul>
+            </div>
+            <div class="popover-inner">
+              <p class="popover-title">Арликовая пчела</p>
+              <ul class="popover-list">
+                <li class="popover-item">
+                  <a href="#" class="popover-link">красная</a>
+                </li>
+                <li class="popover-item">
+                  <a href="#" class="popover-link">розовая</a>
+                </li>
+                <li class="popover-item">
+                  <a href="#" class="popover-link">черная</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+        <button id="button-registration" class="button header-button">
+          Регистрация
+        </button>
+      </div>
+    </header>
+    <main class="main container">
+      <h1 class="main-title title">Фильтр результатов</h1>
+      <div class="main-content">
+        <div class="row">
+          <!-- price -->
+          <div class="price">
+            <p class="caption price-caption">Цена</p>
+            <form class="price-form form-price" id="formPrice">
+              <div class="form-price-field">
+                <label class="form-price-label" for="minPrice">от</label>
+                <div class="form-price-input-container">
+                  <input
+                    class="form-price-input minPrice"
+                    type="number"
+                    id="minPrice"
+                    value="50"
+                  />
+                  <svg class="form-price-input-image" width="16" height="16">
+                    <use xlink:href="#dollar" />
+                  </svg>
+                </div>
+              </div>
+              <div class="form-price-field">
+                <label class="form-price-label" for="maxPrice">до</label>
+                <div class="form-price-input-container">
+                  <input
+                    class="form-price-input"
+                    type="number"
+                    id="maxPrice"
+                    value="110"
+                  />
+                  <svg class="form-price-input-image" width="16" height="16">
+                    <use xlink:href="#dollar" />
+                  </svg>
+                </div>
+              </div>
+            </form>
+            <div class="form-price-slider">
+              <div class="form-price-progress" id="progress"></div>
+            </div>
+            <div class="form-price-input-range" id="inputRange">
+              <input
+                type="range"
+                class="form-price-input-range-min"
+                min="0"
+                max="150"
+                value="30"
+                step="5"
+              />
+              <input
+                type="range"
+                class="form-price-input-range-max"
+                min="0"
+                max="150"
+                value="110"
+                step="5"
+              />
+            </div>
+          </div>
+          <!-- kind -->
+          <div class="kind">
+            <p class="kind-caption caption">Вид пчелы</p>
+            <form class="kind-form form-kind">
+              <label class="form-kind-checkbox checkbox">
+                <input
+                  class="form-kind-checkbox-input checkbox-input"
+                  type="checkbox"
+                />
+                <span class="form-kind-checkbox-button checkbox-button">
+                  <svg class="form-kind-checkbox-icon checkbox-icon">
+                    <use xlink:href="#checkboxIcon" />
+                  </svg>
+                </span>
+                <span class="form-kind-checkbox-text checkbox-text"
+                  >Большая индийская пчела</span
+                >
+              </label>
+              <label class="form-kind-checkbox checkbox">
+                <input
+                  class="form-kind-checkbox-input checkbox-input"
+                  type="checkbox"
+                />
+                <span class="form-kind-checkbox-button checkbox-button">
+                  <svg class="form-kind-checkbox-icon checkbox-icon">
+                    <use xlink:href="#checkboxIcon" />
+                  </svg>
+                </span>
+                <span class="form-kind-checkbox-text checkbox-text"
+                  >Медоносная пчела</span
+                >
+              </label>
+              <label class="form-kind-checkbox checkbox">
+                <input
+                  class="form-kind-checkbox-input checkbox-input"
+                  type="checkbox"
+                />
+                <span class="form-kind-checkbox-button checkbox-button">
+                  <svg class="form-kind-checkbox-icon checkbox-icon">
+                    <use xlink:href="#checkboxIcon" />
+                  </svg>
+                </span>
+                <span class="form-kind-checkbox-text checkbox-text"
+                  >Индийская пчела</span
+                >
+              </label>
+              <label class="form-kind-checkbox checkbox">
+                <input
+                  class="form-kind-checkbox-input checkbox-input"
+                  type="checkbox"
+                />
+                <span class="form-kind-checkbox-button checkbox-button">
+                  <svg class="form-kind-checkbox-icon checkbox-icon">
+                    <use xlink:href="#checkboxIcon" />
+                  </svg>
+                </span>
+                <span class="form-kind-checkbox-text checkbox-text"
+                  >Арликовая пчела</span
+                >
+              </label>
+            </form>
+          </div>
+        </div>
+        <div class="row">
+          <!-- rating -->
+          <div class="rating">
+            <p class="rating-caption caption">Рейтинг пчел</p>
+            <div class="star">
+              <svg class="star-icon" data-value="1">
+                <use xlink:href="#star" />
+              </svg>
+              <svg class="star-icon" data-value="2">
+                <use xlink:href="#star" />
+              </svg>
+              <svg class="star-icon" data-value="3">
+                <use xlink:href="#star" />
+              </svg>
+              <svg class="star-icon" data-value="4">
+                <use xlink:href="#star" />
+              </svg>
+              <svg class="star-icon" data-value="5">
+                <use xlink:href="#star" />
+              </svg>
+            </div>
+          </div>
+          <!-- manufacturer -->
+          <div class="manufacturer">
+            <p class="manufacturer-caption caption">Выбрать производителя</p>
+            <form class="form-manufacturer">
+              <label class="form-manufacturer-checkbox checkbox checkbox-round">
+                <input
+                  class="form-manufacturer-checkbox-input checkbox-input checkbox-round-input"
+                  type="checkbox"
+                />
+                <span
+                  class="form-manufacturer-checkbox-button checkbox-button checkbox-round-button"
+                >
+                  <svg
+                    class="form-manufacturer-checkbox-icon checkbox-icon checkbox-round-icon"
+                  >
+                    <use xlink:href="#checkboxIcon" />
+                  </svg>
+                </span>
+                <svg
+                  class="form-manufacturer-checkbox-text checkbox-text checkbox-round-text"
+                >
+                  <use xlink:href="#sony" />
+                </svg>
+              </label>
+              <label class="form-manufacturer-checkbox checkbox checkbox-round">
+                <input
+                  class="form-manufacturer-checkbox-input checkbox-input checkbox-round-input"
+                  type="checkbox"
+                />
+                <span
+                  class="form-manufacturer-checkbox-button checkbox-button checkbox-round-button"
+                >
+                  <svg
+                    class="form-manufacturer-checkbox-icon checkbox-icon checkbox-round-icon"
+                  >
+                    <use xlink:href="#checkboxIcon" />
+                  </svg>
+                </span>
+                <svg
+                  class="form-manufacturer-checkbox-text checkbox-text checkbox-round-text"
+                >
+                  <use xlink:href="#sony" />
+                </svg>
+              </label>
+              <label class="form-manufacturer-checkbox checkbox checkbox-round">
+                <input
+                  class="form-manufacturer-checkbox-input checkbox-input checkbox-round-input"
+                  type="checkbox"
+                />
+                <span
+                  class="form-manufacturer-checkbox-button checkbox-button checkbox-round-button"
+                >
+                  <svg
+                    class="form-manufacturer-checkbox-icon checkbox-icon checkbox-round-icon"
+                  >
+                    <use xlink:href="#checkboxIcon" />
+                  </svg>
+                </span>
+                <svg
+                  class="form-manufacturer-checkbox-text checkbox-text checkbox-round-text"
+                >
+                  <use xlink:href="#sony" />
+                </svg>
+              </label>
+            </form>
+          </div>
+        </div>
+        <div class="row">
+          <!-- bee -->
+          <div class="bee">
+            <div class="bee-caption caption">Волосатость брюшка пчелы</div>
+            <form class="form-bee">
+              <select
+                class="form-bee-select"
+                name="typeBee"
+                id="typeBee"
+                multiple
+              >
+                <option disabled value="1" class="form-bee-option">
+                  Большая индийская пчела
+                </option>
+                <option value="2" class="form-bee-option">
+                  Медоносная пчела
+                </option>
+                <option value="3" class="form-bee-option">
+                  Индийская пчела
+                </option>
+                <option value="4" class="form-bee-option">
+                  Арликовая пчела
+                </option>
+              </select>
+            </form>
+          </div>
+          <!-- cloth -->
+          <div class="cloth">
+            <p class="cloth-caption caption">Выбрать тип одежды</p>
+            <div class="form-cloth">
+              <label class="form-cloth-checkbox">
+                <input class="form-cloth-checkbox-input" type="checkbox" />
+                <span class="form-cloth-checkbox-button"
+                  ><svg class="form-cloth-checkbox-icon">
+                    <use xlink:href="#blazer" />
+                  </svg>
+                </span>
+              </label>
+              <label class="form-cloth-checkbox">
+                <input class="form-cloth-checkbox-input" type="checkbox" />
+                <span class="form-cloth-checkbox-button"
+                  ><svg
+                    class="form-cloth-checkbox-icon form-cloth-checkbox-icon-2"
+                  >
+                    <use xlink:href="#watch" />
+                  </svg>
+                </span>
+              </label>
+              <label class="form-cloth-checkbox">
+                <input class="form-cloth-checkbox-input" type="checkbox" />
+                <span class="form-cloth-checkbox-button"
+                  ><svg
+                    class="form-cloth-checkbox-icon form-cloth-checkbox-icon-3"
+                  >
+                    <use xlink:href="#trousers" />
+                  </svg>
+                </span>
+              </label>
+              <label class="form-cloth-checkbox">
+                <input class="form-cloth-checkbox-input" type="checkbox" />
+                <span class="form-cloth-checkbox-button"
+                  ><svg
+                    class="form-cloth-checkbox-icon form-cloth-checkbox-icon-4"
+                  >
+                    <use xlink:href="#overalls" />
+                  </svg>
+                </span>
+              </label>
+              <label class="form-cloth-checkbox">
+                <input class="form-cloth-checkbox-input" type="checkbox" />
+                <span class="form-cloth-checkbox-button"
+                  ><svg
+                    class="form-cloth-checkbox-icon form-cloth-checkbox-icon-5"
+                  >
+                    <use xlink:href="#jacket" />
+                  </svg>
+                </span>
+              </label>
+              <label class="form-cloth-checkbox">
+                <input class="form-cloth-checkbox-input" type="checkbox" />
+                <span class="form-cloth-checkbox-button"
+                  ><svg
+                    class="form-cloth-checkbox-icon form-cloth-checkbox-icon-6"
+                  >
+                    <use xlink:href="#shoes" />
+                  </svg>
+                </span>
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="button-row">
+          <button class="button-row-button">Записать</button>
+          <button class="button-row-button">Сбросить</button>
+        </div>
+      </div>
+    </main>
+    <!-- data -->
+    <div class="data" id="dataList">
+      <button class="close close-burger" id="closeData">
+        <span class="close-line"></span>
+      </button>
+      <div class="data-content">
+        <h2 class="data-title">Таблица данных</h2>
+        <span class="data-line"></span>
+        <div class="data-content">
+          <div class="data-item" id="dataItem">
+            <span class="data-plus"><span></span></span>
+            <span class="data-number">№1234</span>
+            <span class="data-data">12.03.2007</span>
+          </div>
+          <div class="data-info info-data" id="dataItemInfo">
+            <div class="info-data-box info-data-head info-data-head-1">
+              Вид пчел
+            </div>
+            <div class="info-data-box info-data-head info-data-head-2"></div>
+            <div class="info-data-box info-data-head info-data-head-3">
+              Одежда
+            </div>
+            <div class="info-data-box info-data-head info-data-head-4">
+              Цена
+            </div>
+            <div class="info-data-box info-data-body">Индийская пчела</div>
+            <div class="info-data-box info-data-body">Индийская пчела</div>
+            <div class="info-data-box info-data-body">
+              <svg class="info-data-body-img">
+                <use xlink:href="#trousers" />
+              </svg>
+            </div>
+            <div class="info-data-box info-data-body">
+              70
+              <svg class="info-data-body-icon">
+                <use xlink:href="#dollar" />
+              </svg>
+            </div>
+            <div class="info-data-box info-data-body">Индийская пчела</div>
+            <div class="info-data-box info-data-body">Индийская пчела</div>
+            <div class="info-data-box info-data-body">
+              <svg class="info-data-body-img">
+                <use xlink:href="#trousers" />
+              </svg>
+            </div>
+            <div class="info-data-box info-data-body">
+              70
+              <svg class="info-data-body-icon">
+                <use xlink:href="#dollar" />
+              </svg>
+            </div>
+          </div>
+          <div class="data-item" id="dataItem">
+            <span class="data-plus"><span></span></span>
+            <span class="data-number">№1234</span>
+            <span class="data-data">12.03.2007</span>
+          </div>
+          <div class="data-info info-data" id="dataItemInfo">
+            <div class="info-data-box info-data-head info-data-head-1">
+              Вид пчел
+            </div>
+            <div class="info-data-box info-data-head info-data-head-2"></div>
+            <div class="info-data-box info-data-head info-data-head-3">
+              Одежда
+            </div>
+            <div class="info-data-box info-data-head info-data-head-4">
+              Цена
+            </div>
+            <div class="info-data-box info-data-body">Индийская пчела</div>
+            <div class="info-data-box info-data-body">Индийская пчела</div>
+            <div class="info-data-box info-data-body">
+              <svg class="info-data-body-img">
+                <use xlink:href="#trousers" />
+              </svg>
+            </div>
+            <div class="info-data-box info-data-body">
+              70
+              <svg class="info-data-body-icon">
+                <use xlink:href="#dollar" />
+              </svg>
+            </div>
+            <div class="info-data-box info-data-body">Индийская пчела</div>
+            <div class="info-data-box info-data-body">Индийская пчела</div>
+            <div class="info-data-box info-data-body">
+              <svg class="info-data-body-img">
+                <use xlink:href="#trousers" />
+              </svg>
+            </div>
+            <div class="info-data-box info-data-body">
+              70
+              <svg class="info-data-body-icon">
+                <use xlink:href="#dollar" />
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <script type="module" src="./index.js"></script>
+    <!-- burger-menu -->
+    <div class="burger-menu" id="burgerMenu">
+      <button class="close close-burger" id="closeBurgerMenu">
+        <span class="close-line"></span>
+      </button>
+      <ul class="burger-menu-list">
+        <li
+          class="burger-menu-item burger-menu-item-plus"
+          id="showPopoverOnMobile"
+        >
+          <span class="burger-menu-item-bee"
+            >Пчелы<span class="burger-menu-item-bee-line" id="itemBee"></span
+          ></span>
+          <span class="burger-menu-item-line"
+            ><span class="burger-menu-item-line-2" id="plus"></span
+          ></span>
+        </li>
+        <div class="popover popover-mobile" id="popoverMobile">
+          <div class="popover-inner popover-inner-mobile">
+            <p class="popover-title">Индийская пчела</p>
+            <ul class="popover-list">
+              <li class="popover-item">
+                <a href="#" class="popover-link">красная</a>
+              </li>
+              <li class="popover-item">
+                <a href="#" class="popover-link">розовая</a>
+              </li>
+              <li class="popover-item">
+                <a href="#" class="popover-link">черная</a>
+              </li>
+            </ul>
+          </div>
+          <div class="popover-inner popover-inner-mobile">
+            <p class="popover-title">Арликовая пчела</p>
+            <ul class="popover-list">
+              <li class="popover-item">
+                <a href="#" class="popover-link">красная</a>
+              </li>
+              <li class="popover-item">
+                <a href="#" class="popover-link">розовая</a>
+              </li>
+              <li class="popover-item">
+                <a href="#" class="popover-link">черная</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <li class="burger-menu-item" id="beeHouse">Дом пчелы</li>
+        <li class="burger-menu-item">Соты</li>
+        <li class="burger-menu-item">Мед</li>
+        <li class="burger-menu-item" id="viewDataOnMobile">Таблица данных</li>
+        <li class="burger-menu-item" id="burgerRegistration">Регистрация</li>
+      </ul>
+    </div>
+    <!-- Form -->
+    <div class="form-wrapper" id="form">
+      <form class="form">
+        <button class="close" id="close">
+          <span class="close-line"></span>
+        </button>
+        <p class="form-title">Зарегистрируйтесь</p>
+        <label class="form-label" for="name">Имя</label>
+        <input class="form-input" type="text" id="name" name="name" />
+        <span class="form-error" id="formNameError"></span>
+        <label class="form-label" for="email">Почта</label>
+        <input class="form-input" type="email" id="email" name="email" />
+        <span class="form-error" id="formEmailError"></span>
+        <label class="form-label" for="tel">Телефон</label>
+        <input class="form-input" type="tel" id="tel" name="tel" />
+        <span class="form-error" id="formTelError"></span>
+        <label class="form-label" for="password">Пароль</label>
+        <input
+          class="form-input"
+          type="password"
+          id="password"
+          name="password"
+        />
+        <span class="form-error" id="formPasswordError"></span>
+        <label class="form-label" for="doublePassword">Повторите пароль</label>
+        <input
+          class="form-input"
+          type="password"
+          id="doublePassword"
+          name="doublePassword"
+        />
+        <span class="form-error" id="formDoublePasswordError"></span>
+        <button class="form-button">Зарегистрироваться</button>
+      </form>
+    </div>
+    <!-- </body> -->
+    <!-- SVG -->
+    <svg style="width: 0; height: 0">
+      <!-- checkboxIcon -->
+      <symbol
+        id="checkboxIcon"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M20.7071 6.29289C21.0976 6.68342 21.0976 7.31658 20.7071 7.70711L9.70711 18.7071C9.31658 19.0976 8.68342 19.0976 8.29289 18.7071L3.29289 13.7071C2.90237 13.3166 2.90237 12.6834 3.29289 12.2929C3.68342 11.9024 4.31658 11.9024 4.70711 12.2929L9 16.5858L19.2929 6.29289C19.6834 5.90237 20.3166 5.90237 20.7071 6.29289Z"
+        />
+      </symbol>
+      <!-- dollar -->
+      <symbol
+        id="dollar"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 15.51 17.89"
+      >
+        <path d="M-324-338.77H956V755.81H-324z" style="fill: #ffdc55" />
+        <path d="M-153.06-9.81h180v40h-180z" style="fill: #fff" />
+        <text
+          style="
+            fill: #333;
+            font-family: Roboto-Bold, Roboto;
+            font-size: 18px;
+            font-weight: 700;
+          "
+          transform="translate(2.3 16.02)"
+        >
+          <tspan x="0" y="0">$</tspan>
+        </text>
+      </symbol>
+      <!-- blazer -->
+      <symbol
+        id="blazer"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 62.87 40.34"
+      >
+        <path
+          d="M62.81 28.01 45.54.2a.423.423 0 0 0-.41-.19H17.71c-.15 0-.29.06-.38.2L.06 28.01a.38.38 0 0 0-.05.31c.02.11.09.2.18.26l6.51 4.04c.19.12.45.06.57-.13L17.3 16.33v23.59c0 .23.19.41.41.41h27.35c.23 0 .41-.19.41-.41V16.23l10.09 16.26c.12.19.38.25.57.13l6.51-4.04c.09-.06.16-.15.19-.26.03-.11 0-.22-.05-.31ZM36.85 8.87l1.01 5.92-3.67 5.91V10.18l.9-1.74.04-.08 3.74-7.27 4.08 3.77-5.91 3.59c-.15.09-.22.26-.19.42Zm-3.48 1.21v29.43h-3.85V10.08c0-.07-.02-.13-.05-.19l-.2-.38c.67.32 1.4.48 2.17.48s1.5-.17 2.17-.48l-.2.38c-.03.06-.05.12-.05.19Zm-7.52-1.64-5.91-3.59 4.08-3.77 3.74 7.27.04.08.9 1.74v10.52l-3.67-5.91 1.01-5.92a.405.405 0 0 0-.19-.42Zm8.56-.48a4.252 4.252 0 0 1-5.92 0L24.82.82h4.49v1.79c0 .23.19.42.41.42h3.46c.23 0 .41-.19.41-.42V.83h4.49l-3.67 7.14ZM32.76.82v1.37h-2.63V.83h2.63ZM18.15 14.87V9.38c0-.23-.19-.41-.41-.41s-.41.19-.41.41v5.37L6.8 31.7.99 28.09 17.91.83h5.15l-4.1 3.79c-.1.09-.14.22-.13.35.01.13.09.25.2.31l6.14 3.73-.99 5.8c-.02.1 0 .2.06.29l4.46 7.18v17.23H18.16V14.88Zm37.93 16.82L45.5 14.65V9.38c0-.23-.19-.41-.41-.41s-.41.19-.41.41v30.11H34.2V22.26l4.46-7.18c.05-.09.07-.19.06-.29l-.99-5.8 6.14-3.73a.44.44 0 0 0 .2-.31.452.452 0 0 0-.13-.35L39.84.81h5.05s.02.01.03.02c.04.02.08.04.12.04l16.89 27.21-5.81 3.61Z"
+        />
+        <path
+          d="m26.34 29.15-1.53-1.53a.423.423 0 0 0-.59 0l-5 5c-.16.16-.16.42 0 .59l1.53 1.53c.08.08.18.12.29.12s.22-.04.29-.12l5-5c.16-.16.16-.42 0-.59Zm-5.29 4.71-.95-.95 4.41-4.41.95.95-4.41 4.41ZM38.65 27.62a.423.423 0 0 0-.59 0l-1.53 1.53c-.16.16-.16.42 0 .59l5 5c.08.08.18.12.29.12s.22-.04.29-.12l1.53-1.53c.16-.16.16-.42 0-.59l-5-5Zm3.17 6.24-4.41-4.41.95-.95 4.41 4.41-.95.95Z"
+        />
+      </symbol>
+      <!-- jacket -->
+      <symbol
+        id="jacket"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 58.84 47.33"
+      >
+        <path
+          d="m58.81 39.39-.79-2.18c0-.06 0-.12-.03-.18a.391.391 0 0 0-.1-.16L44.71.34s-.02-.05-.04-.08a.473.473 0 0 0-.42-.26H14.6c-.08 0-.15.01-.22.04a.47.47 0 0 0-.24.26L.03 39.36c-.09.24.04.51.28.6l8.94 3.23c.12.04.24.04.36-.02.11-.05.2-.15.24-.26l.85-2.35 3.46-9.59v15.9c0 .26.21.47.47.47h29.63c.26 0 .47-.21.47-.47V31.09l4.28 11.85c.04.12.13.21.24.26.11.05.24.06.36.02l8.94-3.23c.24-.09.37-.36.28-.6ZM27.85.93h3.14v1.52h-3.14V.93Zm-.93 0v1.99c0 .26.21.47.47.47h4.07c.26 0 .47-.21.47-.47V.93h6.73C38.42 4.87 35.14 8 31.14 8h-3.42c-4 0-7.28-3.13-7.52-7.07h6.73ZM9.12 42.15l-8.06-2.91.53-1.46 8.06 2.89-.53 1.47Zm5.96-13.78v-.03l1.42-16.22a.461.461 0 0 0-.42-.5.477.477 0 0 0-.51.42l-1.41 16.13-4.2 11.62L1.9 36.9 14.9.93h4.35c.24 4.46 3.94 8.01 8.46 8.01h5.47v1.64h-5.47a.47.47 0 0 0-.47.47V46.4H15.08V28.37Zm13.09-16.86h2.49v34.88h-2.49V11.51Zm16.51 16.75s-.01-.02-.02-.03l-1.41-16.18a.457.457 0 0 0-.51-.42c-.26.02-.45.25-.42.5l1.42 16.22s.02.1.04.14V46.4H31.59V11.51h2.05c.26 0 .47-.21.47-.47V8.39c3.07-1.15 5.3-4.04 5.49-7.46h4.34l13 35.98-8.06 2.89-4.17-11.55Zm5.03 13.92-.54-1.49 8.06-2.89.53 1.48-8.06 2.91Z"
+        />
+        <path
+          d="M24.23 33.64a.47.47 0 0 0-.66 0l-6.42 6.42a.47.47 0 0 0 .33.8c.12 0 .24-.05.33-.14l6.42-6.42a.47.47 0 0 0 0-.66ZM35.27 33.64a.47.47 0 0 0-.66 0 .47.47 0 0 0 0 .66l6.42 6.42c.09.09.21.14.33.14a.47.47 0 0 0 .33-.8l-6.42-6.42ZM32.08 10.43a.67.67 0 1 0 0-1.34.67.67 0 0 0 0 1.34Z"
+        />
+      </symbol>
+      <!-- logo -->
+      <symbol
+        id="logo"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 98.53 40"
+      >
+        <path
+          d="M57.42 12.25v4.39c.39-.7.96-1.26 1.71-1.7.64-.37 1.43-.55 2.35-.55 1.68 0 3.05.71 4.12 2.14 1.07 1.43 1.6 3.28 1.6 5.55s-.53 4.12-1.6 5.55c-.53.7-1.26 1.2-2.17 1.51-.91.31-1.81.47-2.7.47-1.71 0-3.3-.46-4.76-1.37-1.46-.92-2.19-2.67-2.19-5.27V10.39h1.82c.5 0 .93.18 1.28.55.36.37.53.81.53 1.32Zm6.1 9.67c0-1.32-.27-2.34-.8-3.08-.53-.77-1.27-1.15-2.19-1.15-1 0-1.77.37-2.3 1.1-.53.77-.8 1.81-.8 3.13 0 1.54.25 2.66.75 3.35.53.77 1.28 1.15 2.25 1.15s1.76-.38 2.3-1.15c.53-.77.8-1.89.8-3.35ZM78.7 24.83h2.67c-.39 1.54-1.14 2.71-2.25 3.52-1.11.84-2.5 1.26-4.17 1.26-2.03 0-3.62-.68-4.76-2.03-1.14-1.32-1.71-3.2-1.71-5.66s.55-4.18 1.66-5.49c1.14-1.35 2.73-2.03 4.76-2.03 2.14 0 3.8.66 4.97 1.98 1.14 1.36 1.71 3.24 1.71 5.66v.6c0 .18-.02.31-.05.38h-9.25c.04 1.14.3 1.98.8 2.53.46.59 1.16.88 2.09.88.61 0 1.12-.13 1.55-.38.11-.04.2-.1.29-.19.09-.09.19-.19.29-.3.04-.11.17-.26.4-.44s.56-.27.99-.27Zm-6.42-4.29h5.46c-.07-.99-.32-1.72-.75-2.2-.46-.51-1.12-.77-1.98-.77-.78 0-1.43.26-1.93.77s-.77 1.25-.8 2.2ZM93.03 24.83h2.67c-.39 1.54-1.14 2.71-2.25 3.52-1.11.84-2.5 1.26-4.17 1.26-2.03 0-3.62-.68-4.76-2.03-1.14-1.32-1.71-3.2-1.71-5.66s.55-4.18 1.66-5.49c1.14-1.35 2.73-2.03 4.76-2.03 2.14 0 3.8.66 4.97 1.98 1.14 1.36 1.71 3.24 1.71 5.66v.6c0 .18-.02.31-.05.38h-9.25c.03 1.14.3 1.98.8 2.53.46.59 1.16.88 2.09.88.61 0 1.12-.13 1.55-.38.11-.04.2-.1.29-.19.09-.09.19-.19.29-.3.04-.11.17-.26.4-.44s.56-.27.99-.27Zm-6.42-4.29h5.46c-.07-.99-.32-1.72-.75-2.2-.46-.51-1.12-.77-1.98-.77-.78 0-1.43.26-1.93.77s-.77 1.25-.8 2.2Z"
+          style="fill: #665822"
+        />
+        <path
+          d="M14.39 26.88c.14.72.39 1.4.71 2.03h6.88v-2.04h-7.59ZM14.23 22.59v2.02l7.7-.01h.04v-2.01h-7.74zM14.23 18.4h7.75v1.92h-7.75zM14.39 11.84h7.59V5.56c-3.37-.02-6.75 2.08-7.59 6.28ZM16.82 31.18c1.48 1.35 3.32 2.02 5.16 2.01v-2.01h-5.16ZM14.23 16.13h7.75v-2.02h-7.75v2.02Z"
+          style="fill: #faa61a"
+        />
+        <path
+          d="M24.16 10.31a3.2 3.2 0 0 0-2.32-.99c-.53 0-.96-.44-.96-.99s.43-.99.96-.99c1.39 0 2.69.56 3.67 1.56.38.39.38 1.01 0 1.4-.38.38-.98.39-1.36 0Z"
+          style="fill: #fff"
+        />
+        <path
+          d="M36.54 11.85h-4.83c-.43-2.77-1.93-5.16-4.06-6.71l3.11-3.2c.43-.44.43-1.16 0-1.6-.43-.44-1.13-.44-1.56 0l-3.57 3.67c-2.44-1.01-5.18-1-7.67.12L14.27.33c-.43-.44-1.13-.44-1.56 0-.43.44-.43 1.16 0 1.6l3.28 3.37a10.236 10.236 0 0 0-3.84 6.54H7.32C3.28 11.84 0 15.22 0 19.37s3.29 7.52 7.32 7.52h4.83c.68 4.4 4.15 8.01 8.67 8.5v3.48c0 .63.49 1.14 1.1 1.14s1.1-.51 1.1-1.14v-3.49c4.11-.49 7.9-3.54 8.67-8.49h4.83c4.04 0 7.32-3.37 7.32-7.52 0-4.15-3.29-7.52-7.32-7.52ZM12.02 24.61h-4.7c-2.82 0-5.11-2.35-5.11-5.24 0-2.9 2.29-5.25 5.11-5.25h4.7v10.5Zm17.45-12.79c-1.67 0-13.33.01-15.08.01 1.68-8.38 13.39-8.38 15.08-.01ZM16.82 31.17h10.22c-2.93 2.68-7.29 2.68-10.22 0Zm11.94-2.27H15.09c-.32-.63-.56-1.31-.71-2.03h15.08c-.14.72-.39 1.4-.71 2.03Zm.87-4.3h-15.4v-2.02h15.4v2.02Zm0-4.29h-15.4v-1.92h15.4v1.92Zm0-4.19h-15.4V14.1l15.4-.01v2.03Zm6.91 8.49h-4.7V14.1h4.7c2.82 0 5.11 2.36 5.11 5.26s-2.29 5.25-5.11 5.25Z"
+          style="fill: #665822"
+        />
+      </symbol>
+      <!-- overalls -->
+      <symbol
+        id="overalls"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 27.18 60.82"
+      >
+        <path
+          d="M26.72 56.22h-.37V37.56l-2.02-22.12V.47a.47.47 0 0 0-.47-.47h-2.75a.47.47 0 0 0-.47.47v14.5H6.55V.47A.47.47 0 0 0 6.08 0H3.33a.47.47 0 0 0-.47.47v14.96L.84 37.59v18.63H.47a.47.47 0 0 0-.47.47v3.68c0 .26.21.47.47.47h11.87c.26 0 .47-.21.47-.47v-3.68a.47.47 0 0 0-.47-.47h-.37L12 45.1c0-.81.72-1.46 1.6-1.46s1.6.66 1.6 1.46l.03 11.12h-.37a.47.47 0 0 0-.47.47v3.68c0 .26.21.47.47.47h11.87c.26 0 .47-.21.47-.47v-3.68a.47.47 0 0 0-.47-.47ZM3.8 7.48V.93h1.82v6.55H3.8Zm.31 2.75h-.3V8.41h1.82v1.82h-.31c-.15-.19-.37-.3-.6-.3s-.45.11-.6.29Zm1.2.95h.3v3.79H3.79v-3.79h.31c.15.2.37.3.6.3s.45-.11.6-.29Zm16.26-3.7V.93h1.82v6.55h-1.82Zm.31 2.75h-.3V8.41h1.82v1.82h-.31c-.15-.19-.37-.3-.6-.3s-.45.11-.6.29Zm1.2.95h.3v3.79h-1.82v-3.79h.31c.15.2.37.3.6.3s.45-.11.6-.29Zm-2.01 24.25h-1.58a.47.47 0 0 0-.47.47v1.25H8.18V35.9a.47.47 0 0 0-.47-.47H6.13a.47.47 0 0 0-.47.47v1.25H1.79L3.77 15.9H23.4l1.98 21.25h-3.86V35.9a.47.47 0 0 0-.47-.47ZM4.28 38.11a3.016 3.016 0 0 1-2.48 2.48h-.03v-2.51h2.51v.03Zm2.31.76v-2.51h.65v2.51h-.65Zm13.35 0v-2.51h.65v2.51h-.65Zm-8.88 6.21-.03 11.13H1.77V41.54h.02c1.8-.23 3.21-1.64 3.43-3.43v-.02h.43v1.25c0 .26.21.47.47.47H7.7c.26 0 .47-.21.47-.47v-1.25h10.84v1.25c0 .26.21.47.47.47h1.58c.26 0 .47-.21.47-.47v-1.25h.43v.02c.23 1.8 1.64 3.21 3.43 3.43h.02v14.68h-9.26l-.03-11.12c0-1.32-1.14-2.39-2.53-2.39s-2.53 1.07-2.53 2.39Zm11.84-7h2.51v2.51h-.03a3.028 3.028 0 0 1-2.48-2.48v-.03ZM11.87 57.14v2.74H.93v-2.74h10.94Zm14.38 0v2.74H15.31v-2.74h10.94Z"
+        />
+        <path
+          d="M22.5 30.56V19.55a.47.47 0 0 0-.47-.47H5.15a.47.47 0 0 0-.47.47v11.01c0 .26.21.47.47.47h16.88c.26 0 .47-.21.47-.47Zm-16.88-.47V20.02h8.9v10.07h-8.9Zm9.83-6.66v-3.41h6.11v3.41h-6.11Zm0 6.66v-5.73h6.11v5.73h-6.11Z"
+        />
+      </symbol>
+      <!-- shoes -->
+      <symbol
+        id="shoes"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 29.32 33.5"
+      >
+        <path
+          d="M6.59 0c-.14 0-.27.05-.36.14C5.98.4.02 6.41 0 9.94c0 1.4.35 3.03.7 4.61.29 1.32.56 2.57.57 3.47 0 1.37-.11 4.4-.21 6.71-.02.05-.03.11-.03.16v.28c-.05 1-.08 1.69-.08 1.71v.02c0 1.81.5 3.45 1.42 4.62 1.01 1.29 2.48 1.98 4.23 1.98s3.21-.68 4.23-1.98c.91-1.16 1.42-2.8 1.42-4.62v-.08l-.08-1.64v-.29c0-.05 0-.11-.03-.16-.1-2.31-.22-5.34-.21-6.71 0-.85.26-1.93.52-3.08.35-1.52.75-3.24.74-5.01C13.17 6.4 7.21.39 6.96.14A.506.506 0 0 0 6.6 0Zm0 32.49c-3.41 0-4.3-2.89-4.53-4.36 1.04 1.45 2.73 2.34 4.53 2.34s3.49-.88 4.53-2.34c-.23 1.47-1.12 4.36-4.53 4.36Zm4.54-7.32c-.14 2.4-2.14 4.28-4.54 4.28s-4.4-1.88-4.54-4.28c.09-2.02.24-5.63.23-7.16 0-1.01-.29-2.31-.59-3.68-.22-1.03-.46-2.09-.58-3.06l5.48-4.23 5.5 4.25c-.13 1.2-.4 2.38-.64 3.43-.28 1.2-.54 2.34-.55 3.3-.01 1.53.14 5.14.23 7.16ZM6.28 5.99l-5.26 4.06v-.11c.01-2.68 4.47-7.53 5.58-8.7 1.11 1.17 5.56 6.02 5.58 8.7v.11L6.92 5.99c-.09-.07-.2-.11-.31-.11s-.22.04-.31.11Z"
+        />
+        <path
+          d="M7.43 19.58H5.76c-.28 0-.51.23-.51.51v6.14c0 .28.23.51.51.51h1.67c.28 0 .51-.23.51-.51v-6.14c0-.28-.23-.51-.51-.51Zm-.51 1.02v5.12h-.65V20.6h.65ZM28.63 14.55c.35-1.58.7-3.21.7-4.61C29.31 6.41 23.35.4 23.1.15c-.09-.09-.22-.14-.36-.14s-.27.05-.36.14c-.25.25-6.22 6.26-6.23 9.79 0 1.77.39 3.49.74 5.01.27 1.14.52 2.23.52 3.08 0 1.37-.11 4.4-.21 6.71-.02.05-.03.11-.03.16v.28c-.04.96-.08 1.63-.08 1.71v.03c0 1.81.5 3.45 1.42 4.62 1.01 1.29 2.48 1.98 4.23 1.98s3.21-.68 4.23-1.98c.91-1.16 1.42-2.8 1.42-4.62v-.03s-.04-.71-.08-1.7v-.29c0-.05 0-.11-.03-.16-.1-2.31-.22-5.34-.21-6.71 0-.9.28-2.15.57-3.47Zm-5.9 17.94c-3.41 0-4.3-2.89-4.53-4.36 1.04 1.45 2.73 2.34 4.53 2.34s3.49-.88 4.53-2.34c-.23 1.47-1.12 4.36-4.53 4.36Zm4.54-7.32c-.14 2.4-2.14 4.28-4.54 4.28s-4.4-1.88-4.54-4.28c.09-2.02.24-5.63.23-7.16 0-.96-.27-2.1-.55-3.3-.24-1.05-.52-2.24-.65-3.43l5.5-4.25 5.48 4.23c-.12.98-.36 2.04-.58 3.06-.3 1.38-.59 2.68-.59 3.68-.01 1.53.14 5.14.23 7.16ZM22.42 5.99l-5.26 4.06v-.11c.01-2.68 4.46-7.54 5.58-8.7 1.11 1.17 5.56 6.02 5.58 8.7v.11l-5.26-4.06a.51.51 0 0 0-.62 0Z"
+        />
+        <path
+          d="M23.56 19.58h-1.67c-.28 0-.51.23-.51.51v6.14c0 .28.23.51.51.51h1.67c.28 0 .51-.23.51-.51v-6.14c0-.28-.23-.51-.51-.51Zm-.51 1.02v5.12h-.65V20.6h.65Z"
+        />
+      </symbol>
+      <!-- sony -->
+      <symbol
+        id="sony"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 91.26 29.5"
+      >
+        <path
+          d="M89.87 12.85c-.77 0-1.39.62-1.39 1.39s.62 1.39 1.39 1.39 1.39-.62 1.39-1.39-.62-1.39-1.39-1.39Zm0 2.61c-.68 0-1.22-.55-1.22-1.23s.55-1.22 1.22-1.22 1.22.55 1.22 1.22-.55 1.23-1.22 1.23Z"
+        />
+        <path
+          d="M90.58 13.87c0-.13-.06-.27-.17-.33a.726.726 0 0 0-.38-.08h-.68v1.55h.19v-.72h.35l.44.72h.23l-.47-.72c.28 0 .49-.12.49-.43Zm-.75.28h-.29v-.55h.44c.19 0 .4.03.4.27 0 .32-.34.28-.56.28ZM81.72 6.36l2.84-3.04c.16-.22.25-.38.25-.51 0-.22-.19-.31-.79-.31h-.72V.58h7.77V2.5h-1.02c-1.18 0-1.4.18-3.04 2.25l-4.5 4.86v2.96c0 .76.38 1.03 1.48 1.03h1.7v1.85H74.81V13.6h1.7c1.1 0 1.48-.27 1.48-1.03V9.61l-5.3-5.86c-.88-1.02-.75-1.25-3.19-1.25V.58h9.84V2.5h-.7c-.71 0-1.01.13-1.01.4 0 .22.22.4.36.58l2.68 2.92c.32.33.71.37 1.07-.04ZM15.71.58h2.37v5.35h-2.19c-.19-1.07-.86-1.49-1.47-2.05-1.1-1.01-3.48-1.85-5.49-1.85-2.59 0-4.77.8-4.77 1.98 0 3.28 14.8.67 14.8 6.86 0 3.23-3.17 5.04-8.86 5.04-1.97 0-4.95-.61-6.71-1.55-.55-.32-.79.3-.89 1.08H.06V9.91h2.2c.49 1.4 1.15 1.69 1.77 2.25 1.07.98 3.61 1.69 5.94 1.67 3.51-.03 4.72-.8 4.72-1.92s-1.19-1.38-5.04-1.98L6.38 9.4C2.69 8.84.01 8.02.01 5.08S3.4.11 8.77.11c2.26 0 4.16.3 5.97 1.33.5.33.98.37.97-.86ZM62.02 9.54l.05-5.94c0-.78-.41-1.05-1.57-1.05h-1.36V.69h8.67v1.85h-1.13c-1.16 0-1.57.27-1.57 1.05v11.97l-3.39-.03-10.99-10.4v7.55c0 .76.41 1.05 1.57 1.05h1.51v1.83h-9v-1.83h1.49c1.16 0 1.57-.29 1.57-1.05V3.59c0-.78-.41-1.05-1.57-1.05h-1.49V.69h7.78l9.43 8.84ZM32.99 0c-6.91 0-11.23 3.05-11.23 7.96s4.26 7.85 11.02 7.85c7.18 0 11.35-2.99 11.35-8.09 0-4.59-4.51-7.71-11.14-7.71Zm-.16 13.86c-3.82 0-6.02-2.21-6.02-6.02s2.29-5.93 6.21-5.93 5.96 2.25 5.96 6.08-2.23 5.86-6.15 5.86Z"
+        />
+        <path
+          d="M10.75 21.61c-1.16 0-2.05.55-2.66 1.62-.24-.45-.57-.82-1-1.11-.93-.64-2.07-.68-3.07-.11-.33.19-.59.41-.79.66v-.94h-.65v7.54h.65v-4.8c0-.64.22-1.18.65-1.61.43-.43.97-.65 1.61-.65s1.15.25 1.63.76c.47.51.71 1.1.71 1.74v4.56h.64v-4.6c0-.73.21-1.34.63-1.79.42-.45.97-.68 1.66-.68.73 0 1.28.25 1.7.77.42.52.63 1.22.63 2.1v4.19h.63v-4.24c0-1.05-.26-1.89-.78-2.5-.52-.62-1.26-.93-2.17-.93ZM21.3 23.44c-.74-1.22-1.88-1.83-3.39-1.83-1.03 0-1.95.4-2.71 1.19-.76.79-1.15 1.72-1.15 2.77s.4 2.01 1.2 2.77c.8.76 1.77 1.15 2.89 1.15.72 0 1.41-.22 2.04-.65.46-.32.83-.7 1.11-1.15v1c0 .1 0 .21.02.32v.29h.64v-7.5h-.64v1.65Zm-.95-.24c.64.64.97 1.45.97 2.38s-.33 1.68-.97 2.32c-.65.63-1.44.96-2.34.96s-1.7-.32-2.34-.96c-.64-.64-.97-1.42-.97-2.33s.32-1.7.96-2.35c.64-.65 1.42-.98 2.31-.98s1.73.33 2.38.97ZM28.39 21.77h-.81l-3.75 4.96v-7.77h-.69v10.33h.69v-1.48l1.38-1.84c1.14 1.36 2 2.46 2.56 3.27l.04.05h.87l-3.01-3.86 2.72-3.66ZM36.72 25.57c-.01-1.07-.41-2-1.17-2.78-.76-.78-1.68-1.17-2.72-1.17s-2.01.38-2.81 1.13c-.8.75-1.21 1.65-1.21 2.66 0 1.18.39 2.16 1.15 2.93.76.77 1.74 1.16 2.91 1.16.74 0 1.44-.22 2.07-.66a4.41 4.41 0 0 0 1.47-1.77l.08-.17h-.65l-.04.05c-.48.71-.94 1.2-1.37 1.45-.47.28-1.12.43-1.92.43-.71 0-1.37-.28-1.97-.82-.6-.54-.95-1.19-1.04-1.91-.02-.17-.03-.31-.04-.41h7.26v-.12Zm-3.92-3.32c.82 0 1.55.29 2.16.86.59.54.94 1.2 1.06 1.96h-6.55c.18-.83.57-1.5 1.14-2.01.6-.54 1.34-.81 2.18-.81ZM46.99 21.57c-.74 0-1.44.2-2.07.59-.5.31-.91.7-1.22 1.18l.04-4.42h-.7v10.35h.66v-1.56c.28.44.66.83 1.16 1.14.66.42 1.35.63 2.05.63 1.09 0 2.05-.38 2.84-1.14.8-.76 1.2-1.67 1.2-2.72 0-1.12-.39-2.08-1.15-2.87a3.764 3.764 0 0 0-2.8-1.19Zm3.29 3.98c0 .96-.33 1.75-.99 2.35-.66.61-1.51.91-2.53.91-.81 0-1.53-.33-2.14-.99-.62-.66-.93-1.42-.93-2.26 0-.91.33-1.7.97-2.35.64-.65 1.43-.98 2.33-.98s1.69.33 2.33.98c.64.65.96 1.44.96 2.35ZM59.28 25.57c-.01-1.07-.41-2-1.17-2.78-.76-.78-1.68-1.17-2.72-1.17s-2.01.38-2.81 1.13c-.8.75-1.21 1.65-1.21 2.66 0 1.18.39 2.16 1.15 2.93.76.77 1.74 1.16 2.91 1.16.74 0 1.44-.22 2.07-.66a4.41 4.41 0 0 0 1.47-1.77l.08-.17h-.65l-.04.05c-.48.71-.94 1.2-1.37 1.45-.47.28-1.12.43-1.92.43-.71 0-1.37-.28-1.97-.82-.6-.54-.95-1.19-1.04-1.91-.02-.17-.03-.31-.04-.41h7.26v-.12Zm-3.92-3.32c.82 0 1.54.29 2.16.86.59.54.94 1.2 1.06 1.96h-6.55c.18-.83.57-1.5 1.14-2.01.6-.54 1.34-.81 2.18-.81ZM60.21 29.28h.65V18.97h-.65v10.31zM62 29.28h.66v-7.5H62v7.5zM62 20.41h.66v-1.42H62v1.42zM71.48 25.57c-.01-1.07-.41-2-1.17-2.78-.76-.78-1.68-1.17-2.72-1.17s-2.01.38-2.81 1.13c-.8.75-1.21 1.65-1.21 2.66 0 1.18.39 2.16 1.15 2.93.76.77 1.74 1.16 2.91 1.16.74 0 1.44-.22 2.07-.66a4.41 4.41 0 0 0 1.47-1.77l.08-.17h-.65l-.04.05c-.48.71-.94 1.2-1.37 1.45-.47.28-1.12.43-1.92.43-.71 0-1.37-.28-1.97-.82-.6-.54-.95-1.19-1.04-1.91-.02-.17-.03-.31-.04-.41h7.26v-.12Zm-3.92-3.32c.82 0 1.54.29 2.16.86.59.54.94 1.2 1.06 1.96h-6.55c.18-.83.57-1.5 1.14-2.01.6-.54 1.34-.81 2.18-.81ZM74.57 28.42l-2.67-6.67h-.72l3.05 7.5h.67l3.11-7.45-.65-.06-2.79 6.68zM85.25 26.95c-.48.71-.94 1.2-1.37 1.45-.47.28-1.12.43-1.92.43-.71 0-1.37-.28-1.97-.82-.6-.54-.95-1.19-1.04-1.91-.02-.17-.03-.3-.04-.41h7.26v-.12A3.948 3.948 0 0 0 85 22.79c-.76-.78-1.68-1.17-2.72-1.17s-2.01.38-2.81 1.13c-.8.75-1.21 1.65-1.21 2.66 0 1.18.39 2.16 1.15 2.93.76.77 1.74 1.16 2.91 1.16.74 0 1.44-.22 2.07-.66a4.41 4.41 0 0 0 1.47-1.77l.08-.17h-.65l-.04.05Zm-3-4.71c.82 0 1.55.29 2.16.86.59.54.94 1.2 1.06 1.96h-6.55c.18-.83.57-1.5 1.14-2.01.6-.54 1.34-.81 2.18-.81ZM40.62 28.24c0 .7-.56 1.26-1.26 1.26s-1.26-.56-1.26-1.26.56-1.26 1.26-1.26 1.26.56 1.26 1.26Z"
+        />
+      </symbol>
+      <!-- star -->
+      <symbol
+        id="star"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 27.34 26"
+      >
+        <path
+          d="m13.67 0 3.38 9.72 10.29.21-8.2 6.22L22.12 26l-8.45-5.88L5.22 26l2.98-9.85L0 9.93l10.29-.21L13.67 0z"
+        />
+      </symbol>
+      <!-- trousers -->
+      <symbol
+        id="trousers"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 32.91 49.64"
+      >
+        <path
+          d="M32.44 0H.47A.47.47 0 0 0 0 .47v48.69c0 .26.21.47.47.47h12.98c.26 0 .47-.21.47-.47v-3.92s.02-.08.02-.12l.02-32.5c0-1.37 1.12-2.49 2.49-2.49s2.49 1.12 2.49 2.49l.02 32.5s0 .08.02.12v3.92c0 .26.21.47.47.47h12.98c.26 0 .47-.21.47-.47V.47a.47.47 0 0 0-.47-.47Zm-.47 24.98h-3.62v-1.71h3.62v1.71Zm-3.62.95h3.62v6.63h-3.62v-6.63Zm3.62-18.26c-1.2-.2-2.14-1.15-2.34-2.34h2.34v2.34Zm0-3.29h-3.62V.95h3.62v3.43ZM27.4.95v3.94h-1.16V.95h1.16ZM7.62.95h17.67v3.43H7.62V.95Zm-.95 0v3.94H5.51V.95h1.16Zm-2.1 0v3.43H.95V.95h3.62ZM.95 25.93h3.62v6.63H.95v-6.63Zm3.62-.95H.95v-1.71h3.62v1.71ZM.95 5.32h2.34c-.2 1.2-1.15 2.14-2.34 2.34V5.32Zm12.04 43.37H.95V45.6h12.04v3.09Zm3.47-39.5c-1.89 0-3.43 1.54-3.43 3.43l-.02 32.03H.95V33.5h4.1c.26 0 .47-.21.47-.47V22.8a.47.47 0 0 0-.47-.47H.95V8.63a3.8 3.8 0 0 0 3.3-3.3h.32v.04c0 .26.21.47.47.47h2.1c.26 0 .47-.21.47-.47v-.04h17.67v.04c0 .26.21.47.47.47h2.1c.26 0 .47-.21.47-.47v-.04h.32a3.8 3.8 0 0 0 3.3 3.3v13.7h-4.1a.47.47 0 0 0-.47.47v10.23c0 .26.21.47.47.47h4.1v11.15H19.88l-.02-32.03c0-1.89-1.54-3.43-3.43-3.43Zm15.51 39.5H19.93V45.6h12.04v3.09Z"
+        />
+        <path
+          d="M16.46 1.04c-.88 0-1.6.72-1.6 1.6s.72 1.6 1.6 1.6 1.6-.72 1.6-1.6-.72-1.6-1.6-1.6Zm0 2.26a.66.66 0 1 1 .66-.66c0 .37-.29.66-.66.66Z"
+        />
+      </symbol>
+      <!-- watch -->
+      <symbol
+        id="watch"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 12.3 64.17"
+      >
+        <path
+          d="M10.02 60.3v-3.15c0-.06.05-.11.11-.11h.23a.49.49 0 0 0 0-.98h-.23c-.06 0-.11-.05-.11-.11V36.91s.01-.06.04-.09c1.43-1.18 2.25-2.91 2.25-4.75s-.82-3.57-2.25-4.75c-.03-.02-.04-.05-.04-.09V8.14c0-.06.05-.11.11-.11h1.03a.49.49 0 0 0 0-.98h-1.03c-.06 0-.11-.05-.11-.11V3.86c0-2.13-1.73-3.87-3.87-3.87S2.28 1.72 2.28 3.86v3.08c0 .06-.05.11-.11.11H1.14a.49.49 0 0 0 0 .98h1.03c.06 0 .11.05.11.11V27.25c0 .03-.01.06-.04.08-1.43 1.18-2.25 2.91-2.25 4.75s.82 3.57 2.25 4.75c.03.02.04.05.04.09v19.04c0 .06-.05.11-.11.11h-.23a.49.49 0 0 0 0 .98h.23c.06 0 .11.05.11.11v3.15c0 2.13 1.73 3.87 3.87 3.87s3.87-1.73 3.87-3.87ZM3.37 7.05c-.06 0-.11-.05-.11-.11V3.86c0-1.59 1.3-2.89 2.89-2.89s2.89 1.3 2.89 2.89v3.08c0 .06-.05.11-.11.11H3.37Zm.05 19.52s-.07.01-.1 0a.105.105 0 0 1-.05-.09V8.14c0-.06.05-.11.11-.11h5.56c.06 0 .11.05.11.11v18.34s-.02.07-.05.09a.09.09 0 0 1-.1 0c-.86-.43-1.78-.64-2.73-.64s-1.88.22-2.74.64Zm-2.44 5.5c0-2.85 2.32-5.17 5.17-5.17s5.17 2.32 5.17 5.17S9 37.24 6.15 37.24.98 34.92.98 32.07Zm5.77 23.98c-.06 0-.11-.05-.11-.11v-2.45a.49.49 0 0 0-.98 0v2.45c0 .06-.05.11-.11.11H3.36c-.06 0-.11-.05-.11-.11V37.66s.02-.07.05-.09a.09.09 0 0 1 .1 0c.86.43 1.78.64 2.74.64s1.88-.22 2.73-.64c.03-.02.07-.01.1 0 .03.02.05.05.05.09v18.28c0 .06-.05.11-.11.11H6.72Zm-3.49 4.23v-3.15c0-.06.05-.11.11-.11h5.56c.06 0 .11.05.11.11v3.15c0 1.59-1.3 2.89-2.89 2.89s-2.89-1.3-2.89-2.89Z"
+        />
+        <path
+          d="M6.8 11.12c0-.36-.29-.66-.66-.66s-.65.29-.65.66.29.65.65.65.66-.29.66-.65ZM6.8 14.73c0-.36-.29-.65-.66-.65s-.65.29-.65.65.29.66.65.66.66-.29.66-.66ZM6.78 18.5a.657.657 0 0 0-1.27-.33.657.657 0 0 0 1.27.33ZM6.49 32.93s.04-.05.06-.08v-.02l.02-.03.02-.04v-.07s.02-.01.02-.02v-3.48a.49.49 0 0 0-.98 0v3.13s-.01.06-.03.08l-1.56 1.56c-.09.09-.14.22-.14.35s.05.25.14.35c.09.09.22.14.35.14s.25-.05.35-.14l1.74-1.74Z"
+        />
+      </symbol>
+    </svg>
+    <!-- script -->
+    <script type="module" src="./js/index.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag/dist/js/multi-select-tag.js"></script>
+    <script>
+      new MultiSelectTag("typeBee"); // id
+    </script>
   </body>
 </html>

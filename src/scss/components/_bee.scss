@@ -1,0 +1,12 @@
+@use "utils" as u;
+
+.bee {
+  margin-bottom: 40px;
+  width: 100%;
+  @include u.media("tablet-wide") {
+    width: 50%;
+  }
+  &-caption {
+    margin-bottom: 20px;
+  }
+}

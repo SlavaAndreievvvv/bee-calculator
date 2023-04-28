@@ -1,0 +1,8 @@
+@use "utils" as u;
+
+.manufacturer {
+  margin-right: 80px;
+  &-caption {
+    margin-bottom: 20px;
+  }
+}

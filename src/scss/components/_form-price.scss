@@ -1,0 +1,112 @@
+@use "utils" as u;
+
+.form-price {
+  display: flex;
+  align-items: center;
+  margin-bottom: 40px;
+  &-field {
+    display: flex;
+    align-items: center;
+    @include u.media("tablet") {
+      width: 100%;
+    }
+  }
+  &-label {
+    font-size: 12px;
+    margin-right: 8px;
+    @include u.media("tablet") {
+      margin-right: 24px;
+    }
+  }
+  &-input-container {
+    position: relative;
+    background-color: u.$color-white;
+    max-width: 160px;
+    margin-right: 10px;
+    @include u.media("tablet") {
+      margin-right: 30px;
+      max-width: 100%;
+      width: 100%;
+    }
+  }
+  &-input {
+    height: 40px;
+    padding-left: 12px;
+    padding-right: 12px;
+    background-color: u.$color-white;
+    border: none;
+    outline: none;
+    font-size: 12px;
+    text-decoration: none;
+    -moz-appearance: textfield;
+    max-width: 120px;
+    @include u.media("tablet") {
+      max-width: 100%;
+    }
+  }
+  &-input::placeholder {
+    font-size: 12px;
+  }
+  &-input-image {
+    position: absolute;
+    top: 50%;
+    right: 12px;
+    transform: translateY(-50%);
+  }
+  &-slider {
+    height: 2px;
+    width: 95%;
+    background-color: u.$color-Y3;
+    border-radius: 2px;
+    position: relative;
+  }
+  &-progress {
+    height: 2px;
+    position: absolute;
+    right: 25%;
+    left: 25%;
+    background-color: u.$color-Y2;
+    border-radius: 2px;
+  }
+  &-input-range {
+    position: relative;
+  }
+  &-input-range input {
+    position: absolute;
+    top: -2px;
+    height: 2px;
+    width: 100%;
+    -webkit-appearance: none;
+    background: none;
+    pointer-events: none;
+  }
+  &-input-range-min {
+  }
+  &-input-range-max {
+  }
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1px solid u.$color-Y2;
+  background-color: u.$color-primary;
+  pointer-events: auto;
+  cursor: pointer;
+  background-image: url("/src/assets/svg/three-line.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+input[type="range"]::-moz-range-thumb {
+  -moz-appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1px solid u.$color-Y2;
+  background-color: u.$color-primary;
+  pointer-events: auto;
+  cursor: pointer;
+}

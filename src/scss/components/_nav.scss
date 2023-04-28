@@ -1,0 +1,40 @@
+@use "utils" as u;
+
+.nav {
+  visibility: hidden;
+  display: none;
+  position: relative;
+  height: 75%;
+  @include u.media("tablet-wide") {
+    visibility: visible;
+    display: flex;
+  }
+  &-list {
+    display: flex;
+    flex-direction: row;
+    display: flex;
+    align-items: center;
+    height: 100%;
+  }
+  &-item {
+  }
+  &-item:not(:last-child) {
+    margin-right: 36px;
+  }
+  &-link {
+    text-decoration: none;
+    padding: 15px;
+    border-radius: 2px;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    &:hover {
+      background-color: u.$color-white;
+    }
+  }
+}
+#activePopover.hover {
+  background-color: u.$color-white;
+}

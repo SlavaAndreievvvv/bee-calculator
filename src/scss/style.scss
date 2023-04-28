@@ -1,8 +1,37 @@
-@use './config/normalize';
-@use './config/reset';
-@use './config/common';
+@use "./config/normalize";
+@use "./config/reset";
+@use "./config/common";
 
 // Components
-@use './components/title';
-@use './components/cover';
-@use './components/index-page';
+@use "./components/checkbox";
+@use "./components/caption";
+@use "./components/title";
+@use "./components/link";
+@use "./components/close-button";
+@use "./components/price-range";
+@use "./components/burger-menu";
+@use "./components/burger";
+@use "./components/popover";
+@use "./components/form";
+@use "./components/form-price";
+@use "./components/form-kind";
+@use "./components/form-bee";
+@use "./components/logo";
+@use "./components/nav";
+@use "./components/star";
+@use "./components/rating";
+@use "./components/manufacturer";
+@use "./components/form-manufacturer";
+@use "./components/form-cloth";
+@use "./components/cloth";
+@use "./components/header";
+@use "./components/main";
+@use "./components/price";
+@use "./components/kind";
+@use "./components/bee";
+@use "./components/button-row";
+@use "./components/data";
+@use "./components/info-data";
+
+//Font
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,300;1,400;1,500;1,700;1,900&display=swap");
