@@ -33,6 +33,12 @@
     width: 100%;
     overflow-x: scroll;
   }
+  &-list {
+    overflow-x: scroll;
+    max-height: 60vh;
+    height: 100%;
+    overflow-y: scroll;
+  }
   &-item {
     width: 100%;
     height: 40px;

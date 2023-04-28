@@ -444,13 +444,13 @@
       <div class="data-content">
         <h2 class="data-title">Таблица данных</h2>
         <span class="data-line"></span>
-        <div class="data-content">
-          <div class="data-item" id="dataItem">
+        <div class="data-list">
+          <div class="data-item">
             <span class="data-plus"><span></span></span>
             <span class="data-number">№1234</span>
             <span class="data-data">12.03.2007</span>
           </div>
-          <div class="data-info info-data" id="dataItemInfo">
+          <div class="data-info info-data">
             <div class="info-data-box info-data-head info-data-head-1">
               Вид пчел
             </div>
@@ -488,12 +488,12 @@
               </svg>
             </div>
           </div>
-          <div class="data-item" id="dataItem">
+          <div class="data-item">
             <span class="data-plus"><span></span></span>
             <span class="data-number">№1234</span>
             <span class="data-data">12.03.2007</span>
           </div>
-          <div class="data-info info-data" id="dataItemInfo">
+          <div class="data-info info-data">
             <div class="info-data-box info-data-head info-data-head-1">
               Вид пчел
             </div>
@@ -539,8 +539,8 @@
       <button class="close close-burger" id="closeBurgerMenu">
         <span class="close-line"></span>
       </button>
-      <ul class="burger-menu-list">
-        <li
+      <div class="burger-menu-list">
+        <span
           class="burger-menu-item burger-menu-item-plus"
           id="showPopoverOnMobile"
         >
@@ -550,7 +550,7 @@
           <span class="burger-menu-item-line"
             ><span class="burger-menu-item-line-2" id="plus"></span
           ></span>
-        </li>
+        </span>
         <div class="popover popover-mobile" id="popoverMobile">
           <div class="popover-inner popover-inner-mobile">
             <p class="popover-title">Индийская пчела</p>
@@ -581,12 +581,16 @@
             </ul>
           </div>
         </div>
-        <li class="burger-menu-item" id="beeHouse">Дом пчелы</li>
-        <li class="burger-menu-item">Соты</li>
-        <li class="burger-menu-item">Мед</li>
-        <li class="burger-menu-item" id="viewDataOnMobile">Таблица данных</li>
-        <li class="burger-menu-item" id="burgerRegistration">Регистрация</li>
-      </ul>
+        <span class="burger-menu-item" id="beeHouse">Дом пчелы</span>
+        <span class="burger-menu-item">Соты</span>
+        <span class="burger-menu-item">Мед</span>
+        <span class="burger-menu-item" id="viewDataOnMobile"
+          >Таблица данных</span
+        >
+        <span class="burger-menu-item" id="burgerRegistration"
+          >Регистрация</span
+        >
+      </div>
     </div>
     <!-- Form -->
     <div class="form-wrapper" id="form">
