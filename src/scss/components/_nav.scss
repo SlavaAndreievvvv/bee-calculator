@@ -17,6 +17,16 @@
     height: 100%;
   }
   &-item {
+    position: relative;
+  }
+  &-item-icon {
+    position: absolute;
+    top: 50%;
+    right: -3px;
+    width: 10px;
+    height: 10px;
+    fill: u.$color-Y2;
+    transform: translate(-50%, -50%);
   }
   &-item:not(:last-child) {
     margin-right: 36px;
