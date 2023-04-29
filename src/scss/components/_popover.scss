@@ -12,6 +12,7 @@
   top: 52px;
   left: -36px;
   border-radius: 2px;
+  transition: all 1s ease;
   z-index: 200;
   &-mobile {
     position: relative;
@@ -53,4 +54,17 @@
 .popover.active {
   display: flex;
   opacity: 1;
+  transition: all 1s ease;
+  animation: opacity 0.5s ease;
+}
+
+@keyframes opacity {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY();
+  }
 }
