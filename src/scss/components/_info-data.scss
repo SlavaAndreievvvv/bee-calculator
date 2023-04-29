@@ -4,10 +4,9 @@
   padding: 10px;
   background-color: u.$color-Y4;
   display: grid;
-  grid-template-columns: 300px 425px 100px 150px;
-  grid-gap: 10px;
+  grid-template-columns: 320px 440px 100px 150px;
+  grid-gap: 12px;
   justify-content: space-between;
-  gap: 12px;
   overflow-x: scroll;
   &-box {
     height: 40px;
