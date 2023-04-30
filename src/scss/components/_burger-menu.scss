@@ -8,12 +8,15 @@
   left: 0;
   right: 0;
   bottom: 0;
-  display: none;
-  opacity: none;
+  display: block;
+  opacity: 0;
   background-color: #d4b53c;
   z-index: 110;
   padding-top: 100px;
   padding-bottom: 120px;
+  transform: translateX(-120vw);
+  transition: all 0.5s ease;
+
   &-list {
     margin: 0 auto;
     display: flex;
@@ -70,19 +73,11 @@
 }
 
 .burger-menu.active {
-  display: block;
   pointer-events: visible;
   animation: fadeIn 0.3s ease;
+  opacity: 1;
+  transform: translateX(0);
 }
 .burger-menu-item-line-2.active {
   transform: rotate(90deg);
-}
-
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
 }
