@@ -30,6 +30,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
   }
   &-item-plus {
     position: relative;
@@ -48,7 +49,7 @@
     width: 110%;
     height: 0.8px;
     background-color: transparent;
-    transition: all 0.3s ease;
+    transition: all 0.5s ease;
   }
   &-item-plus .burger-menu-item-line {
     position: relative;
@@ -65,7 +66,7 @@
     top: 0;
     left: 0;
     transform: rotate(180deg);
-    transition: all 0.3s ease;
+    transition: all 0.5s ease;
   }
   &-item:not(:first-child) {
     margin-top: 60px;
@@ -74,7 +75,6 @@
 
 .burger-menu.active {
   pointer-events: visible;
-  animation: fadeIn 0.3s ease;
   opacity: 1;
   transform: translateX(0);
 }
